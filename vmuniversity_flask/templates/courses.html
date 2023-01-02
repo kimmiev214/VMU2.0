@@ -1,0 +1,54 @@
+{% extends 'index.html' %}
+<!This will be the courses page for the registration website.>
+{% block content %}
+<h4>{% block title %} 2022-2023 Course Catalog {% endblock %}</h4>
+<div>
+  <table>
+    <table id="Courses" class="table table-striped">
+      <thead>
+        <tr>
+          <th>Course</th>
+          <th>Description</th>
+          <th>Faculty Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for course in courses %}
+          <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description}}</td>
+            <td>{{ course.professor}}</td>
+            {%if current_user.is_authenticated%}
+            <td><a href="{{ url_for('course_enroll', courseid=course.id, studentID=current_user.id) }}">
+              <i class="material-icons" style="font-size:16px">Enroll</i></a></td>
+            {%endif%}
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {%if current_user.is_authenticated%}
+    <table>
+      <table id="User Courses" class="table table-striped">
+    <thead>
+    </thead>
+    <tbody>
+        <h4>My Schedule</h4>
+          {% for course in current_user.enrolledCourses %}
+          <tr>
+            <td> Course </td>
+            <td> Description</td>
+            <td> Faculty</td>
+            <td> Status</td>
+          </tr>
+          <tr>
+            <td>{{ course.name }}</td>
+            <td>{{ course.description}}</td>
+            <td>{{ course.professor}}</td>
+            <td><a href="{{ url_for('course_disenroll', courseid=course.id, studentID=current_user.id) }}">
+              <i class="material-icons" style="font-size:16px">Disenroll</i></a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+        {%endif%}
+{% endblock %}

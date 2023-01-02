@@ -1,0 +1,113 @@
+{% extends 'index.html' %}
+{% block content %}
+<h2>{{legend}}</h2>
+<div>
+<div>
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-left align-items-center h-100">
+      <div class="col col-md-9 col-lg-7 col-xl-5">
+        <div class="card" style="border-radius: 15px;">
+          <div class="card-body p-4">
+            <div class="d-flex text-black">
+              <div class="flex-shrink-0">
+                <img src="{{image_url}}"
+                  alt="Generic placeholder image" class="img-fluid"
+                  style="width: 180px; border-radius: 10px;">
+              </div>
+              <div class="flex-grow-1 ms-3">
+                <h5 class="mb-1">{{ current_user.first_name }} {{ current_user.last_name }}</h5>
+                <p class="mb-2 pb-1" style="color: #2b2a2a;">VMU Student</p>
+                <div class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                  style="background-color: #efefef;">
+              </div>
+              <p class="mb-2 pb-1" style="color: #2b2a2a;">Username: {{current_user.username}}</p>
+              <p class="mb-2 pb-1" style="color: #2b2a2a;">Email: {{current_user.email}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<h4> Student Information </h4><br>
+<div class="col-lg-8">
+  <div class="card mb-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Full Name</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-muted mb-0">{{ current_user.first_name }} {{ current_user.last_name }}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Email</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-muted mb-0">{{ current_user.email }}</p>
+        </div>
+      </div>
+      <hr>
+      <div class="row">
+        <div class="col-sm-3">
+          <p class="mb-0">Enrollment Date</p>
+        </div>
+        <div class="col-sm-9">
+          <p class="text-muted mb-0">{{ current_user.date_created.strftime("%m/%d/%Y") }}</p>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+
+<br><h4> Update Account </h4><br>
+<div class="container">
+  <form method="POST" action="" enctype="multipart/form-data">
+{{form.hidden_tag()}}
+<fieldset class="form-group">
+  <div class="form-group">
+    {{form.first_name.label(class="form-control-label")}}
+    {%if form.first_name.errors%}
+    {{form.first_name(class="form-control form control-lg is-invalid")}}
+    {%for error in form.first_name.errors%}
+    <span>{{error}}</span>
+    {%endfor%}
+    {%else%}
+    {{form.first_name(class="form-control form control-lg")}}
+    {%endif%}
+  </div>
+  <div class="form-group">
+    {{form.last_name.label(class="form-control-label")}}
+    {%if form.last_name.errors%}
+    {{form.last_name(class="form-control form control-lg is-invalid")}}
+    {%for error in form.last_name.errors%}
+    <span>{{error}}</span>
+    {%endfor%}
+    {%else%}
+    {{form.last_name(class="form-control form control-lg")}}
+    {%endif%}
+  </div>
+<div class="form-group">
+  {{form.image.label()}}
+  {{form.image(class="form-control-file")}}
+  {% if form.image.errors %}
+    {% for error in form.image.errors %}
+      <span class = "text-danger"> {{error}}</span><br>
+    {% endfor %}
+  {% endif %}
+</div>
+</fieldset>
+
+<div class="form-group mt-4">
+  <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                style="z-index: 1;">
+                {{form.update}}
+              </button>
+</div>
+</form>
+</div>
+{% endblock %}
