@@ -3,5 +3,5 @@
 # Read credentials.txt
 # Read User Guide PDF 
 #
-# Go to 
+# Go to https://vmu-edu.onrender.com/
 #
