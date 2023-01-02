@@ -11,7 +11,6 @@ from PIL import Image
 from flask_login import login_user, logout_user, current_user
 import os
 
-
 #the @app.route command determines what happens when the given hyperlink is clicked
 @app.route('/register/', methods =['GET','POST'])
 def register():

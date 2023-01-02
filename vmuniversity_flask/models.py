@@ -1,4 +1,4 @@
-from vmuniversity_flask import db, login_manager, app
+from vmuniversity_flask import db, login_manager
 from datetime import datetime
 from flask_login import UserMixin
 
